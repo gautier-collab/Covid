@@ -1,0 +1,76 @@
+should be ready on May, 20.
+
+Top attributes to use:
+ID > name > class
+
+
+EC stands for 'expected condition'
+
+From WHO, required values are:
+- total infected
+- new infected [OK]
+- total deaths
+- new deaths
+
+
+
+celery -A tasks worker --loglevel=info
+reverse.delay("someString")
+
+
+
+25/04:
+
+** Global **
+Total infected: 145216414
+New infected: 849130
+Total deaths: 3079390
+New deaths: 13120
+
+** USA **
+Total infected: 32790896
+New infected: 1243
+Total deaths: 585893
+New deaths: 13
+
+** Europe **
+Total infected: 49629373
+New infected: 57431
+Total deaths: 1051840
+New deaths: 1374
+
+** Italy **
+Total infected: 3949517
+New infected:
+Total deaths: 119021
+New deaths:
+
+** France **
+Total infected: 5473579
+New infected:
+Total deaths: 102713
+New deaths:
+
+** Germany **
+Total infected: 3289321
+New infected:
+Total deaths: 82213
+New deaths:
+
+** Austria **
+Total infected: 608979
+New infected: 2025
+Total deaths: 10087
+New deaths: 17
+
+** Switzerland **
+Total infected: 646509
+New infected:
+Total deaths: 10594
+New deaths:
+
+** Zürich canton **
+Total infected: 104304
+New infected: 408
+Total deaths: 1369
+New deaths: 1
