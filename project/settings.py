@@ -33,7 +33,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'covmass.apps.CovmassConfig',
+    'django_crontab',
+    "covmass",
+    # 'covmass.apps.CovmassConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,6 +90,12 @@ DATABASES = {
     }
 }
 
+# enter how often periodic task is run
+CRONJOBS = [
+    ('*/1 * * * *', 'covmass.cron.hi')
+    # ('*/1 * * * *', 'covmass.cron.hi', f'>> {BASE_DIR}/scheduled_job.log')
+]
+# CRONTAB_COMMAND_SUFFIX = '2>&1'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

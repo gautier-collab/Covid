@@ -3,20 +3,12 @@ should be ready on May, 20.
 Top attributes to use:
 ID > name > class
 
-
 EC stands for 'expected condition'
-
-From WHO, required values are:
-- total infected
-- new infected [OK]
-- total deaths
-- new deaths
-
-
 
 celery -A tasks worker --loglevel=info
 reverse.delay("someString")
 
+Cron settings (how often to run the task and which task) is at the end of settings.py
 
 
 25/04:
