@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'covmass.apps.CovmassConfig',
+    'covmass',
+    # 'covmass.apps.CovmassConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,3 +132,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = "amqps://ovqqmupu:gIXxmO9EYYPg1khwmcInPD6yK7QUuboU@cow.rmq2.cloudamqp.com/ovqqmupu"
+CELERY_RESULT_BACKEND = "amqps://ovqqmupu:gIXxmO9EYYPg1khwmcInPD6yK7QUuboU@cow.rmq2.cloudamqp.com/ovqqmupu"
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
