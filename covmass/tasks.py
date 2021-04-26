@@ -8,3 +8,6 @@ def sleepy(duration):
   print("wesh alors")
   return None
 
+@shared_task
+def newTest():
+  Test.objects.create(name="nice")

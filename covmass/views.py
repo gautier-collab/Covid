@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .task import *
+from .tasks import *
 
 # Create your views here.
 
