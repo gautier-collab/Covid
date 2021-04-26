@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
+    "django_celery_beat"
 ]
 
 MIDDLEWARE = [
@@ -134,7 +136,11 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_BROKER_URL = "amqps://ovqqmupu:gIXxmO9EYYPg1khwmcInPD6yK7QUuboU@cow.rmq2.cloudamqp.com/ovqqmupu"
-CELERY_RESULT_BACKEND = "amqps://ovqqmupu:gIXxmO9EYYPg1khwmcInPD6yK7QUuboU@cow.rmq2.cloudamqp.com/ovqqmupu"
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_CACHE_BACKEND = 'django-cache'
+
+
+
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
