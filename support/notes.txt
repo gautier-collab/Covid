@@ -96,3 +96,18 @@ Total infected: 104304
 New infected: 408
 Total deaths: 1369
 New deaths: 1
+
+
+
+
+
+Dave advices: 
+
+CRONJOB:
+Docker exec my command for scrapin
+
+Django custom management commands ()pyhon manage.py __command__)
+
+Install crontab
+To edit my crontab:
+sudo crontab -u root -e
