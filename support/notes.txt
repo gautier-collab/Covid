@@ -74,3 +74,9 @@ Total infected: 104304
 New infected: 408
 Total deaths: 1369
 New deaths: 1
+
+
+
+schedule, created = IntervalSchedule.objects.get_or_create(every=10,period=IntervalSchedule.SECONDS)
+
+PeriodicTask.objects.create(interval=schedule, name="New Test", task="covmass.tasks.newTest", args=json.dumps([]), kwargs=json.dumps({}), expires=datetime.utcnow() + timedelta(seconds=500))

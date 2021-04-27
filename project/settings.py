@@ -139,8 +139,8 @@ CELERY_BROKER_URL = "amqps://ovqqmupu:gIXxmO9EYYPg1khwmcInPD6yK7QUuboU@cow.rmq2.
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_CACHE_BACKEND = 'django-cache'
 
-
-
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+
+broker_pool_limit = 1
