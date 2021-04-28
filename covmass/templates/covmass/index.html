@@ -30,14 +30,27 @@
         <tr>
           <th>Ort</th>
           <th>Bestätigte Infektionen</th>
-          <th>∆Infektionen</th>
+          <th>∆Infektionen (24 Std)</th>
           <th>Todesfälle </th>
-          <th>∆Todesfälle</th>
+          <th>∆Todesfälle (24 Std)</th>
           <th>Quelle</th>
         </tr>
+
+        {% for zone in zones %}
+          <tr>
+            <td>{{zone.name}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="{{zone.source.url}}">{{zone.source.name}}</a></td>
+          </tr>
+        {% endfor %}
+
+<!-- 
         <tr>
           <td>Global</td>
-          <td></td>
+          <td>{{zone.name}}</td>
           <td></td>
           <td></td>
           <td></td>
@@ -98,7 +111,7 @@
           <td></td>
           <td></td>
           <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </body>

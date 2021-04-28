@@ -99,6 +99,11 @@ New deaths: 1
 
 
 
+Sources:
+WHO - https://covid19.who.int
+nCoV2019 - https://ncov2019.live/data
+
+
 
 
 Dave advices: 
