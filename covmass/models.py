@@ -8,7 +8,7 @@ class Zone(models.Model):
 
 class Metric(models.Model):
   total = models.IntegerField()
-  total_per_hour = models.CharField(max_length=1024)
+  # total_per_hour = models.CharField(max_length=1024)
   new = models.IntegerField()
 
 class Infected(Metric):
