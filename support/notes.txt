@@ -41,71 +41,6 @@ celery -A project worker --loglevel=info
 
 
 
-25/04:
-
-** Global **
-Total infected: 145216414
-New infected: 849130
-Total deaths: 3079390
-New deaths: 13120
-
-** USA **
-Total infected: 32790896
-New infected: 1243
-Total deaths: 585893
-New deaths: 13
-
-** Europe **
-Total infected: 49629373
-New infected: 57431
-Total deaths: 1051840
-New deaths: 1374
-
-** Italy **
-Total infected: 3949517
-New infected:
-Total deaths: 119021
-New deaths:
-
-** France **
-Total infected: 5473579
-New infected:
-Total deaths: 102713
-New deaths:
-
-** Germany **
-Total infected: 3289321
-New infected:
-Total deaths: 82213
-New deaths:
-
-** Austria **
-Total infected: 608979
-New infected: 2025
-Total deaths: 10087
-New deaths: 17
-
-** Switzerland **
-Total infected: 646509
-New infected:
-Total deaths: 10594
-New deaths:
-
-** Zürich canton **
-Total infected: 104304
-New infected: 408
-Total deaths: 1369
-New deaths: 1
-
-
-
-Sources:
-WHO - https://covid19.who.int
-nCoV2019 - https://ncov2019.live/data
-
-
-
-
 Dave advices: 
 
 CRONJOB:
@@ -116,3 +51,15 @@ Django custom management commands ()pyhon manage.py __command__)
 Install crontab
 To edit my crontab:
 sudo crontab -u root -e
+
+
+
+
+******* Branches *********
+
+periodic: first periodic implementation
+celery: learned to use celery
+celery-beat: learned to use celery-beat for periodic tasks (with CloudAMQP)
+trial4: use rabbitMQ locally
+final1: frontend, models and views for covid
+custom_command: learn to use custom commands

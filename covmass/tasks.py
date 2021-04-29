@@ -44,7 +44,7 @@ def scrape(duration):
       driver.quit()
 
     driver.quit()
-
-  sleep(duration)
+    
+    sleep(duration)
   
   return "DONE"
