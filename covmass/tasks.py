@@ -1,9 +1,6 @@
-# from __future__ import absolute_import, unicode_literals
-# from celery import shared_task
-
-from .models import Zone, Infected, Metric, Deceased, Source
-import time
+import time, datetime
 from time import sleep
+from .models import Zone, Infected, Metric, Deceased, Source
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -141,9 +138,14 @@ def ncov_scrape():
 
 def scrape(duration=2):
 
-  while True:
-    WHO_scrape()
-    ncov_scrape()
-    sleep(duration)
+  WHO_scrape()
+  ncov_scrape()
 
-  return "DONE"
+  print(f"Executed at {datetime.datetime.now()}")
+
+  # while True:
+  #   WHO_scrape()
+  #   ncov_scrape()
+  #   sleep(duration)
+
+  # return "DONE"

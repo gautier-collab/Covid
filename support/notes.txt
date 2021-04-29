@@ -62,4 +62,5 @@ celery: learned to use celery
 celery-beat: learned to use celery-beat for periodic tasks (with CloudAMQP)
 trial4: use rabbitMQ locally
 final1: frontend, models and views for covid
-custom_command: learn to use custom commands
+custom_command: custom command implementation
+schedule: automate scraping inside a python script

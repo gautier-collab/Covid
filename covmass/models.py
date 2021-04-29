@@ -23,6 +23,12 @@ class Metric(models.Model):
   # total_per_hour = models.CharField(max_length=1024)
   new = models.IntegerField()
 
+  def display_total(self):
+    return "{:,}".format(self.total).replace(",", "'")
+
+  def display_new(self):
+    return "{:,}".format(self.new).replace(",", "'")
+
 class Infected(Metric):
   zone = models.OneToOneField(Zone, on_delete=models.CASCADE, related_name="infected")
 

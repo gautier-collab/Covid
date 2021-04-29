@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html>
   <header>
-    <title>Covid-19 figures</title>
+    <title>Covid-19 Lagebericht</title>
+
+    <!-- Bootstrap JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style>
 
       body {
-        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        /* font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+        color: white;
+        background-color: rgb(90,94,107)
+      }
+
+      th {
+        background-color: rgb(46,51,62);
+      }
+
+      td{
+        background-color: rgb(60,64,76);
+        text-align: right;
+      }
+
+      .left {
+        text-align: left;
       }
 
       table, th, td {
-        border: 1px solid black;
+        border: 2px solid rgb(40,40,40);
         border-collapse: collapse;
+      }
+
+      .header {
+        text-align: center;
       }
 
       th, td {
         padding: 1rem;
+      }
+
+      .source {
+        color: rgb(99, 196, 254);
+      }
+
+      .center {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 1.8rem;
       }
 
     </style>
@@ -25,95 +61,48 @@
   <body>
 
   <body>
-    <table>
-      <tbody>
-        <tr>
-          <th>Ort</th>
-          <th>Bestätigte Infektionen</th>
-          <th>∆Infektionen (24 Std)</th>
-          <th>Todesfälle </th>
-          <th>∆Todesfälle (24 Std)</th>
-          <th>Quelle</th>
-        </tr>
 
-        {% for zone in zones %}
-          <tr>
-            <td>{{zone.name}}</td>
-            <td>{{zone.infected.total}}</td>
-            <td>{{zone.infected.new}}</td>
-            <td>{{zone.deceased.total}}</td>
-            <td>{{zone.deceased.new}}</td>
-            <td><a href="{{zone.source.url}}">{{zone.source.name}}</a></td>
-          </tr>
-        {% endfor %}
+    <div class="row">
 
-<!-- 
-        <tr>
-          <td>Global</td>
-          <td>{{zone.name}}</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://covid19.who.int">WHO</a></td>
-        </tr>
-        <tr>
-          <td>USA</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
-        <tr>
-          <td>Europa</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
-        <tr>
-          <td>Italien</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
-        <tr>
-          <td>Frankreich</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
-        <tr>
-          <td>Deutschland</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
-        <tr>
-          <td>Österreich</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr>
-        <tr>
-          <td>Schweiz</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><a href="https://ncov2019.live/data">nCoV2019</a></td>
-        </tr> -->
-      </tbody>
-    </table>
+      <div class="col-lg-2 col-sm-1">
+      </div>
+
+      <div class="col-lg-8 col-sm-10">
+
+        <h1>Covid-19 Lagebericht</h1>
+
+        <table class="center">
+          <tbody>
+            <tr class="header">
+              <th>Ort</th>
+              <th>Bestätigte Infektionen</th>
+              <th>∆Infektionen<br/>(24 Std)</th>
+              <th>Todesfälle</th>
+              <th>∆Todesfälle<br/>(24 Std)</th>
+              <th>Quelle</th>
+            </tr>
+
+            {% for zone in zones %}
+              <tr>
+                <td class="left">{{zone.name}}</td>
+                <td>{{zone.infected.display_total}}</td>
+                <td>{{zone.infected.display_new}}</td>
+                <td>{{zone.deceased.display_total}}</td>
+                <td>{{zone.deceased.display_new}}</td>
+                <td class="left"><a href="{{zone.source.url}}" class="source">{{zone.source.name}}</a></td>
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-2 col-sm-1">
+    </div>
+
   </body>
 
 </html>
