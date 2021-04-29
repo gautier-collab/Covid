@@ -24,7 +24,13 @@ class Metric(models.Model):
   new = models.IntegerField()
 
 class Infected(Metric):
-  zone = models.ForeignKey(Zone, on_delete=models.CASCADE, related_name="infected")
+  zone = models.OneToOneField(Zone, on_delete=models.CASCADE, related_name="infected")
+
+  def __str__(self):
+    return f"{self.zone.name} inf."
 
 class Deceased(Metric):
-  zone = models.ForeignKey(Zone, on_delete=models.CASCADE, related_name="deceased")
+  zone = models.OneToOneField(Zone, on_delete=models.CASCADE, related_name="deceased")
+
+  def __str__(self):
+    return f"{self.zone.name} deaths"

@@ -39,10 +39,10 @@
         {% for zone in zones %}
           <tr>
             <td>{{zone.name}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{zone.infected.total}}</td>
+            <td>{{zone.infected.new}}</td>
+            <td>{{zone.deceased.total}}</td>
+            <td>{{zone.deceased.new}}</td>
             <td><a href="{{zone.source.url}}">{{zone.source.name}}</a></td>
           </tr>
         {% endfor %}
