@@ -9,4 +9,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
       return scrape(duration=options["duration"])
-    
+      
