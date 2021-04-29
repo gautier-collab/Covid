@@ -53,7 +53,6 @@ def WHO_scrape():
     print("\n")
 
     # Update database
-
     infected = Infected.objects.get(zone=Zone.objects.get(name="Global"))
     infected.total = total_infected
     infected.new = new_infected
@@ -113,7 +112,7 @@ def ncov_scrape():
     # update DBvalues for infected
     total_infected = number(cell_val(row, ".text--green.text--green.sorting_1"))
     print(location + " total infected : " + str(total_infected))
-    infected = Infected.objects.get(zone=Zone.objects.get(name="United States"))
+    infected = Infected.objects.get(zone=Zone.objects.get(name=location))
     infected.new = total_infected - infected.total
     infected.total = total_infected
     infected.save()
@@ -121,7 +120,7 @@ def ncov_scrape():
     # update DB values for deceased
     total_deceased = number(cell_val(row, ".text--red.text--red"))
     print(location + " total deaths : " + str(total_deceased))
-    deceased = Deceased.objects.get(zone=Zone.objects.get(name="United States"))
+    deceased = Deceased.objects.get(zone=Zone.objects.get(name=location))
     deceased.new = total_deceased - deceased.total
     deceased.total = total_deceased
     deceased.save()
