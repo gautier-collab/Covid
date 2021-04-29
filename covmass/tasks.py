@@ -1,6 +1,6 @@
 import time, datetime
 from time import sleep
-from .models import Zone, Infected, Metric, Deceased, Source
+from .models import Zone, Infected, Metric, Deceased, Source, Update
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -138,10 +138,14 @@ def ncov_scrape():
 
 def scrape(duration=2):
 
+  print(f"Execution start: {datetime.datetime.now()}")
+
   WHO_scrape()
   ncov_scrape()
 
-  print(f"Executed at {datetime.datetime.now()}")
+  Update.objects.create(time=datetime.datetime.now())
+
+  print(f"Execution end: {datetime.datetime.now()}")
 
   # while True:
   #   WHO_scrape()

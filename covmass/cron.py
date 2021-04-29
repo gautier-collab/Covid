@@ -3,7 +3,7 @@ from covmass.tasks import scrape
 
 def cron():
 
-  schedule.every().day.at("12:59").do(scrape)
+  schedule.every().day.at("15:10").do(scrape)
 
   while True:
     schedule.run_pending()

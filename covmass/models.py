@@ -40,3 +40,9 @@ class Deceased(Metric):
 
   def __str__(self):
     return f"{self.zone.name} deaths"
+  
+class Update(models.Model):
+  time = models.CharField(max_length=64)
+  
+  def __str__(self):
+    return self.time
