@@ -9,6 +9,7 @@ from .models import Zone, Infected, Metric, Deceased, Source, Update
 
 
 def number(some_string):
+  print("FLAG ")
   print(f"number is {some_string}")
   return int(some_string.replace(',', '').replace(' ', ''))
 
@@ -67,9 +68,13 @@ def ncov_scrape(driver):
 
   # returns a cell value from a given row and the class name of the targetted column
   def cell_val(row, column_class):
+    print("FLAG 5")
     col = row.find_element_by_css_selector(column_class)
+    print("FLAG 6")
     cell = col.find_element_by_tag_name("span")
+    print("FLAG 7")
     print(f"The text of cell for column '{column_class}' is {cell.text}")
+    print("FLAG 8")
     return cell.text
 
   # prints infected and deceased values for a given location in a specific table
@@ -86,10 +91,15 @@ def ncov_scrape(driver):
       row = tbody.find_element_by_tag_name("tr")
 
     else:
+      
+      print("FLAG 1")
+      
       # get table
       table_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{table_title} COVID-19 Stats')]")))
       table_grandparent = table_title.find_element_by_xpath("../..")
       table = table_grandparent.find_element_by_xpath("../..")
+
+      print("FLAG 2")
 
       # get row
       cell_title = table.find_element_by_xpath(
@@ -98,9 +108,12 @@ def ncov_scrape(driver):
       row = cell_parent.find_element_by_xpath("../..")
 
     # update DBvalues for infected
+    print("FLAG 3")
     temp = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".text--green.text--green.sorting_1")))
     print("ROW TEXT:\n" + row.get_attribute('innerHTML'))
+    print("FLAG 4")
     total_infected = number(cell_val(row, ".text--green.text--green.sorting_1"))
+    print("FLAG 9")
     print(location + " total infected : " + str(total_infected))
     infected = Infected.objects.get(zone=Zone.objects.get(name=location))
     infected.new = total_infected - infected.total
