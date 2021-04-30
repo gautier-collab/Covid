@@ -49,8 +49,8 @@ finally:
 
 driver.quit()
 
-driver.get("https://ncov2019.live/data")
-print("driver accesses Worldowmeter")
-# driver.get("https://www.worldometers.info/coronavirus/")
+# driver.get("https://ncov2019.live/data")
 # print("driver accesses ncov2019")
+driver.get("https://www.worldometers.info/coronavirus/")
+print("driver accesses Worldometer")
 driver.quit()
