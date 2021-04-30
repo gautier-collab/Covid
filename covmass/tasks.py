@@ -12,7 +12,7 @@ def number(some_string):
   return int(some_string.replace(',', '').replace(' ', ''))
 
 
-def WHO_scrape():
+def WHO_scrape(driver):
 
   driver.get("https://covid19.who.int")
 
@@ -62,7 +62,7 @@ def WHO_scrape():
   return "WHO_scrape is done"
 
 
-def ncov_scrape():
+def ncov_scrape(driver):
 
   driver.get("https://ncov2019.live/data")
 
