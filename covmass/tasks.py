@@ -64,15 +64,6 @@ def ncov_scrape(driver):
 
   driver.get("https://ncov2019.live/data")
 
-  # returns a cell value from a given row and the class name of the targetted column
-  def cell_val(row, column_class):
-    col = row.find_element_by_css_selector(column_class)
-    cell = col.find_element_by_tag_name("span")
-    print("Cell text: " + cell.text)
-    # print("Cell parent innerHTML:\n" + cell.parent.get_attribute('innerHTML'))
-    print(f"The text of cell for column '{column_class}' is {cell.text}")
-    return cell.text
-
   # prints infected and deceased values for a given location in a specific table
   def location_data(location, table_title):
 
