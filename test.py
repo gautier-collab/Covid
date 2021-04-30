@@ -49,8 +49,12 @@ finally:
 
 driver.quit()
 
+driver.get("https://covid19.who.int")
+print("WHO accessed again")
+
 # driver.get("https://ncov2019.live/data")
 # print("driver accesses ncov2019")
-driver.get("https://www.worldometers.info/coronavirus/")
-print("driver accesses Worldometer")
+
+# driver.get("https://www.worldometers.info/coronavirus/")
+# print("driver accesses Worldometer")
 driver.quit()
