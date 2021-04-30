@@ -98,6 +98,7 @@ def ncov_scrape(driver):
       row = cell_parent.find_element_by_xpath("../..")
 
     # update DBvalues for infected
+    temp = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".text--green.text--green.sorting_1")))
     total_infected = number(cell_val(row, ".text--green.text--green.sorting_1"))
     print(location + " total infected : " + str(total_infected))
     infected = Infected.objects.get(zone=Zone.objects.get(name=location))
