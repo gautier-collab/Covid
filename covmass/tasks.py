@@ -9,7 +9,7 @@ from .models import Zone, Infected, Metric, Deceased, Source, Update
 
 
 def number(some_string):
-  return int(some_string.replace(',', '').replace(' ', ''))
+  return int(float(some_string.replace(',', '').replace(' ', '')))
 
 
 def WHO_scrape(driver):
