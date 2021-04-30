@@ -48,3 +48,7 @@ finally:
   driver.quit()
 
 driver.quit()
+
+driver.get("https://ncov2019.live/data")
+print("driver accesses ncov2019")
+driver.quit()
