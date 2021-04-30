@@ -18,18 +18,15 @@ def WHO_scrape(driver):
   driver.get("https://covid19.who.int")
 
   try:
-    total_infected_el = WebDriverWait(driver, 10).until(
-      EC.presence_of_element_located((By.XPATH, "(//span[@class='sc-fzoJMP fQymdt'])")))
+    total_infected_el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//span[@class='sc-fzoJMP fQymdt'])")))
     total_infected = int(total_infected_el.text.replace(',', ''))
     print(f"\nGlobal Bestätigte Infektionen: {total_infected}")
 
-    new_infected_el = WebDriverWait(driver, 10).until(
-      EC.presence_of_element_located((By.CSS_SELECTOR, '.sc-fzoJMP.fQymcb')))
+    new_infected_el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.sc-fzoJMP.fQymcb')))
     new_infected = int(new_infected_el.text.replace(',', ''))
     print(f"\nGloabl ∆Infektionen: {new_infected}")
 
-    total_deceased_el = WebDriverWait(driver, 10).until(
-      EC.presence_of_element_located((By.XPATH, "(//span[@class='sc-fzoJMP fQymdt'])[2]")))
+    total_deceased_el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//span[@class='sc-fzoJMP fQymdt'])[2]")))
     total_deceased = int(total_deceased_el.text.replace(',', ''))
     print(f"\nGlobal Bestätigte Infektionen: {total_deceased}")
 
@@ -37,12 +34,15 @@ def WHO_scrape(driver):
     dropdown = driver.find_element_by_xpath(
       "(//div[@class='dropdown__control css-yk16xz-control'])")
     dropdown.click()
+    
     # click the 'Deaths" option
-    option = driver.find_element_by_id("react-select-6-option-1")
+    option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'react-select-6-option-1')))
+    # option = driver.find_element_by_id("react-select-6-option-1")
     option.click()
+    
     # Fetch the newly displayed value
-    new_deceased_el = driver.find_element_by_css_selector(
-      ".sc-fzoJMP.fQymcb")
+    new_deceased_el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.sc-fzoJMP.fQymcb')))
+    # new_deceased_el = driver.find_element_by_css_selector(".sc-fzoJMP.fQymcb")
     new_deceased = int(new_deceased_el.text.replace(',', ''))
     print(f"\nGloabl ∆Todesfälle: {new_deceased}")
     print("\n")
@@ -78,20 +78,17 @@ def ncov_scrape(driver):
 
     # different process for Europe
     if table_title == "Europe":
-      table_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-        (By.XPATH, f"//*[contains(text(), '{table_title} COVID-19 Stats')]")))
+      table_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{table_title} COVID-19 Stats')]")))
       table_grandparent = table_title.find_element_by_xpath("../..")
       table = table_grandparent.find_element_by_xpath("../..")
 
-      table = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "sortable_table_europe")))
+      table = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "sortable_table_europe")))
       tbody = table.find_element_by_tag_name("tbody")
       row = tbody.find_element_by_tag_name("tr")
 
     else:
       # get table
-      table_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-        (By.XPATH, f"//*[contains(text(), '{table_title} COVID-19 Stats')]")))
+      table_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{table_title} COVID-19 Stats')]")))
       table_grandparent = table_title.find_element_by_xpath("../..")
       table = table_grandparent.find_element_by_xpath("../..")
 
@@ -152,6 +149,8 @@ def scrape():
 
   WHO_scrape(driver)
   ncov_scrape(driver)
+
+  driver.quit()
 
   Update.objects.create(time=datetime.datetime.now())
 
