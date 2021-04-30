@@ -9,7 +9,8 @@ from .models import Zone, Infected, Metric, Deceased, Source, Update
 
 
 def number(some_string):
-  return int(float(some_string.replace(',', '').replace(' ', '')))
+  print(f"number is {some_string}")
+  return int(some_string.replace(',', '').replace(' ', ''))
 
 
 def WHO_scrape(driver):
@@ -135,18 +136,18 @@ def scrape():
 
   print(f"Execution start: {datetime.datetime.now()}")
 
-  # # Dev mode config
-  # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
-  # driver = webdriver.Chrome(PATH)
+  # Dev mode config
+  PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
+  driver = webdriver.Chrome(PATH)
 
-  # Prod mode config
-  import os
-  chrome_options = webdriver.ChromeOptions()
-  chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-  chrome_options.add_argument("--headless")
-  chrome_options.add_argument("--disable-dev-shm-usage")
-  chrome_options.add_argument("--no-sandbox")
-  driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+  # # Prod mode config
+  # import os
+  # chrome_options = webdriver.ChromeOptions()
+  # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+  # chrome_options.add_argument("--headless")
+  # chrome_options.add_argument("--disable-dev-shm-usage")
+  # chrome_options.add_argument("--no-sandbox")
+  # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
   WHO_scrape(driver)
