@@ -1,9 +1,9 @@
 import schedule, time
 from covmass.tasks import scrape
 
-def cron():
+def cron(moment):
 
-  schedule.every().day.at("04:43").do(scrape)
+  schedule.every().day.at(moment).do(scrape)
 
   while True:
     schedule.run_pending()

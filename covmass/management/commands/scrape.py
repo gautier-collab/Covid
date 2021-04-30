@@ -4,9 +4,8 @@ from covmass.cron import cron
 class Command(BaseCommand):
   help = 'Scrapes web pages'
 
-  # def add_arguments(self, parser):
-  #   parser.add_argument('duration', type=int)
+  def add_arguments(self, parser):
+    parser.add_argument('moment', type=str) # argument with format hh:mm
 
   def handle(self, *args, **options):
-    # return scrape(duration=options["duration"])
-    return cron()
+    return cron(moment=options["moment"])
