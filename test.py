@@ -45,7 +45,7 @@ try:
   print("\n")
 
 finally:
-  continue
+  prtin("do nothing")
 
 # driver.quit()
 
