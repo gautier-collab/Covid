@@ -44,17 +44,19 @@ try:
   print(f"\nGloabl ∆Todesfälle: {new_deaths.text}")
   print("\n")
 
-finally:
-  driver.quit()
+# finally:
+#   driver.quit()
 
-driver.quit()
+# driver.quit()
 
 driver.get("https://covid19.who.int")
 print("WHO accessed again")
+print(driver.getTitle())
 
 # driver.get("https://ncov2019.live/data")
 # print("driver accesses ncov2019")
 
 # driver.get("https://www.worldometers.info/coronavirus/")
 # print("driver accesses Worldometer")
+
 driver.quit()
