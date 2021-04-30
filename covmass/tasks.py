@@ -8,20 +8,6 @@ from time import sleep
 from .models import Zone, Infected, Metric, Deceased, Source, Update
 
 
-# # Dev mode config
-# PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
-# driver = webdriver.Chrome(PATH)
-
-# Prod mode config
-import os
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
-
 def number(some_string):
   return int(some_string.replace(',', '').replace(' ', ''))
 
@@ -71,8 +57,8 @@ def WHO_scrape():
     deceased.save()
 
   finally:
-    driver.quit()
-  driver.quit()
+    pass
+  
   return "WHO_scrape is done"
 
 
@@ -138,9 +124,10 @@ def ncov_scrape():
     location_data("Germany", "World")
     location_data("Austria", "World")
     location_data("Switzerland", "World")
+    
   finally:
-    driver.quit()
-  driver.quit()
+    pass
+  
   return "ncov_scrape is done"
 
 
@@ -148,8 +135,22 @@ def scrape():
 
   print(f"Execution start: {datetime.datetime.now()}")
 
-  WHO_scrape()
-  ncov_scrape()
+  # # Dev mode config
+  # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
+  # driver = webdriver.Chrome(PATH)
+
+  # Prod mode config
+  import os
+  chrome_options = webdriver.ChromeOptions()
+  chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+  chrome_options.add_argument("--headless")
+  chrome_options.add_argument("--disable-dev-shm-usage")
+  chrome_options.add_argument("--no-sandbox")
+  driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+
+  WHO_scrape(driver)
+  ncov_scrape(driver)
 
   Update.objects.create(time=datetime.datetime.now())
 
