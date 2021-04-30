@@ -44,8 +44,8 @@ try:
   print(f"\nGloabl ∆Todesfälle: {new_deaths.text}")
   print("\n")
 
-# finally:
-#   driver.quit()
+finally:
+  continue
 
 # driver.quit()
 
