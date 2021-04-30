@@ -94,11 +94,11 @@ def ncov_scrape(driver):
     import re
     infected_string = re.search('green sorting_1" data-order="(.*)"><div class', row.get_attribute('innerHTML')).group(1)
     total_infected = number(infected_string)
-    print(location + " total infected : " + str(total_infected))
     infected = Infected.objects.get(zone=Zone.objects.get(name=location))
     infected.new = total_infected - infected.total
     infected.total = total_infected
     infected.save()
+    print(location + " total infected : " + str(total_infected))
 
     # update DB values for deceased
     deceased_string = re.search('text--red" data-order="(.*)"><div class', row.get_attribute('innerHTML')).group(1)
@@ -107,6 +107,7 @@ def ncov_scrape(driver):
     deceased.new = total_deceased - deceased.total
     deceased.total = total_deceased
     deceased.save()
+    print(location + " total deceased : " + str(total_infected))
 
   try:
     location_data('United States', "World")

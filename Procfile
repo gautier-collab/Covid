@@ -1,2 +1,2 @@
 web: gunicorn project.wsgi
-worker: python manage.py scrape 16 00
+worker: python manage.py scrape 16 41
