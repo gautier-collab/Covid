@@ -73,7 +73,8 @@ def ncov_scrape(driver):
     print("FLAG 6")
     cell = col.find_element_by_tag_name("span")
     print("FLAG 7")
-    print("Cell innerHTML:\n" + cell.innerHTML)
+    print("Cell text: " + cell.text)
+    # print("Cell parent innerHTML:\n" + cell.parent.get_attribute('innerHTML'))
     print(f"The text of cell for column '{column_class}' is {cell.text}")
     print("FLAG 8")
     return cell.text
@@ -168,7 +169,7 @@ def scrape():
   WHO_scrape(driver)
   ncov_scrape(driver)
 
-  driver.quit()
+  driver.close()
 
   Update.objects.create(time=datetime.datetime.now())
 
