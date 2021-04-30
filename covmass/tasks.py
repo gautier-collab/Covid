@@ -73,6 +73,7 @@ def ncov_scrape(driver):
     print("FLAG 6")
     cell = col.find_element_by_tag_name("span")
     print("FLAG 7")
+    print("Cell innerHTML:\n" + cell.innerHTML)
     print(f"The text of cell for column '{column_class}' is {cell.text}")
     print("FLAG 8")
     return cell.text
@@ -112,7 +113,11 @@ def ncov_scrape(driver):
     temp = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".text--green.text--green.sorting_1")))
     print("ROW TEXT:\n" + row.get_attribute('innerHTML'))
     print("FLAG 4")
-    total_infected = number(cell_val(row, ".text--green.text--green.sorting_1"))
+    
+    temp = cell_val(row, ".text--green.text--green.sorting_1")
+    total_infected = 100
+    # total_infected = number(cell_val(row, ".text--green.text--green.sorting_1"))
+    
     print("FLAG 9")
     print(location + " total infected : " + str(total_infected))
     infected = Infected.objects.get(zone=Zone.objects.get(name=location))
