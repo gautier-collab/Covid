@@ -7,18 +7,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-# # Dev mode config
-# PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
-# driver = webdriver.Chrome(PATH)
+# Dev mode config
+PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
+driver = webdriver.Chrome(PATH)
 
-# Prod mode config
-import os
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+# # Prod mode config
+# import os
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--disable-dev-shm-usage")
+# chrome_options.add_argument("--no-sandbox")
+# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
 driver.get("https://covid19.who.int")
@@ -45,16 +45,17 @@ try:
   print("\n")
 
 finally:
-  print("do nothing")
+  pass
 
 # driver.quit()
 
-driver.get("https://covid19.who.int")
-print("WHO accessed again")
-print(driver.getTitle())
+# driver.get("https://covid19.who.int")
+# print("WHO accessed again")
+# print(driver.title)
 
-# driver.get("https://ncov2019.live/data")
-# print("driver accesses ncov2019")
+driver.get("https://ncov2019.live/data")
+print("driver accesses ncov2019")
+print(driver.title)
 
 # driver.get("https://www.worldometers.info/coronavirus/")
 # print("driver accesses Worldometer")
