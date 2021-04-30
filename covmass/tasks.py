@@ -94,11 +94,11 @@ def ncov_scrape(driver):
     import re
     infected_string = re.search('green sorting_1" data-order="(.*)"><div class', row.get_attribute('innerHTML')).group(1)
     total_infected = number(infected_string)
-    print(location + " total infected : " + str(total_infected))
     infected = Infected.objects.get(zone=Zone.objects.get(name=location))
     infected.new = total_infected - infected.total
     infected.total = total_infected
     infected.save()
+    print(location + " total infected : " + str(total_infected))
 
     # update DB values for deceased
     deceased_string = re.search('text--red" data-order="(.*)"><div class', row.get_attribute('innerHTML')).group(1)
@@ -107,6 +107,7 @@ def ncov_scrape(driver):
     deceased.new = total_deceased - deceased.total
     deceased.total = total_deceased
     deceased.save()
+    print(location + " total deceased : " + str(total_infected))
 
   try:
     location_data('United States', "World")
@@ -127,18 +128,18 @@ def scrape():
 
   print(f"Execution start: {datetime.datetime.now()}")
 
-  # # Dev mode config
-  # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
-  # driver = webdriver.Chrome(PATH)
+  # Dev mode config
+  PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
+  driver = webdriver.Chrome(PATH)
 
-  # Prod mode config
-  import os
-  chrome_options = webdriver.ChromeOptions()
-  chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-  chrome_options.add_argument("--headless")
-  chrome_options.add_argument("--disable-dev-shm-usage")
-  chrome_options.add_argument("--no-sandbox")
-  driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+  # # Prod mode config
+  # import os
+  # chrome_options = webdriver.ChromeOptions()
+  # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+  # chrome_options.add_argument("--headless")
+  # chrome_options.add_argument("--disable-dev-shm-usage")
+  # chrome_options.add_argument("--no-sandbox")
+  # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
   WHO_scrape(driver)
   ncov_scrape(driver)

@@ -19,9 +19,10 @@ class Zone(models.Model):
     return self.name
 
 class Metric(models.Model):
-  total = models.IntegerField()
   # total_per_hour = models.CharField(max_length=1024)
+  total = models.IntegerField()
   new = models.IntegerField()
+  update = models.DateTimeField(auto_now=True, null=True)
 
   def display_total(self):
     return "{:,}".format(self.total).replace(",", "'")
