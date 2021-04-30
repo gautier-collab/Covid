@@ -136,7 +136,7 @@ def ncov_scrape():
   return "ncov_scrape is done"
 
 
-def scrape(duration=2):
+def scrape():
 
   print(f"Execution start: {datetime.datetime.now()}")
 
