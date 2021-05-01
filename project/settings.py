@@ -12,11 +12,9 @@ load_dotenv(dotenv_path)
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
-STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, 'static'),
-)
-# MEDIA_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'media'))
-# MEDIA_URL = "/media/"
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+MEDIA_ROOT = os.path.normpath(os.path.join(BASE_DIR, '/media/'))
+MEDIA_URL = "/media/"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/

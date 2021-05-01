@@ -101,6 +101,9 @@
           </tbody>
         </table>
 
+        {% comment %} <a href="{% url 'download' %}">Download Document</a> {% endcomment %} 
+        {% comment %} <div onclick="download('{{fileUrl}}', '{{fileName}}')">Download</div> {% endcomment %}
+
       </div>
 
     </div>
@@ -109,5 +112,34 @@
     </div>
 
   </body>
+
+  
+  <!-- <script>
+    function download(url, name) {
+      fetch(url).then(async(res) => {
+        const dfile = await res.covmass();
+        var covmassURL = 
+          window.URL && window.URL.createObjectURL ?
+          window.URL.createObjectURL(dfile) : window.webkitURL.createObjectURL(dfile);
+        var tempLink = document.createElement('a');
+        tempLink.style.display = "none";
+        tempLink.href = covmassURL;
+        tempLink.setAttribute("download", name);
+
+        if (typeof tempLink.download === "undefined") {
+          tempLink.setAttribute("target", "_blank");
+        }
+
+        document.body.appendChild(tempLink);
+        tempLink.click();
+
+        setTimeout(function() {
+          document.body.removeChild(tempLink);
+          window.URL.revokeObjectURL(covmassURL);
+        },200);
+
+      });
+    }
+  </script> -->
 
 </html>
