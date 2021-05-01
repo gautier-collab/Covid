@@ -87,7 +87,7 @@
               <th>Quelle</th>
             </tr>
 
-            {% for zone in zones %}
+            {% for zone in zones|dictsort:"id" %}
               <tr>
                 <td class="left">{{zone.german_name}}</td>
                 <td>{{zone.infected.display_total}}</td>
