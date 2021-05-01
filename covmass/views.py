@@ -15,6 +15,8 @@ def index(request):
   return render(request, "covmass/index.html", context)
 
 
+from django.core.files.storage import FileSystemStorage
+
 def uploadfile_view(request):
   if request.method == 'POST':
     f = request.FILES['file']
@@ -24,7 +26,7 @@ def uploadfile_view(request):
     fileurl = fs.url(file)
     size = fs.size(file)
     return render(request, 'covmass/uploadfile.html', {
-      'fileurl':fileurl, 
+      'fileUrl':fileurl, 
       "fileName": filename,
       "ext":ext, 
       "size": size,
