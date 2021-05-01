@@ -20,7 +20,8 @@ STATICFILES_DIRS = (
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = 'django-insecure-xz&36w+rj=m!44y6d0!&4wieh*)^@kv7r5edt4&*9$p1$6#y94'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # if turned to False, check that admin styles are still there
