@@ -11,6 +11,7 @@ class Source(models.Model):
 
 class Zone(models.Model):
   name = models.CharField(max_length=32)
+  german_name = models.CharField(max_length=32, null=True)
   source = models.ForeignKey(Source, on_delete=models.CASCADE, related_name="zones")
   # infected = models.ForeignKey(Infected, on_delete=models.CASCADE, related_name="zone", null=True)
   # deaths = models.ForeignKey(Deceased, on_delete=models.CASCADE, related_name="zone", null=True)
