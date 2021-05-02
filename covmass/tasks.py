@@ -7,6 +7,7 @@ import time, datetime
 from time import sleep
 from .models import Zone, Infected, Metric, Deceased, Source, Update
 
+from .table import updateDOCX
 
 def number(some_string):
   return int(some_string.replace(',', '').replace(' ', ''))
@@ -128,31 +129,26 @@ def scrape():
 
   print(f"Execution start: {datetime.datetime.now()}")
 
-  # # Dev mode config
-  # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
-  # driver = webdriver.Chrome(PATH)
+  # Dev mode config
+  PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
+  driver = webdriver.Chrome(PATH)
 
-  # Prod mode config
-  import os
-  chrome_options = webdriver.ChromeOptions()
-  chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-  chrome_options.add_argument("--headless")
-  chrome_options.add_argument("--disable-dev-shm-usage")
-  chrome_options.add_argument("--no-sandbox")
-  driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+  # # Prod mode config
+  # import os
+  # chrome_options = webdriver.ChromeOptions()
+  # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+  # chrome_options.add_argument("--headless")
+  # chrome_options.add_argument("--disable-dev-shm-usage")
+  # chrome_options.add_argument("--no-sandbox")
+  # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
   WHO_scrape(driver)
   ncov_scrape(driver)
 
   driver.quit()
 
+  updateDOCX()
+
   Update.objects.create(time=datetime.datetime.now())
 
   print(f"Execution end: {datetime.datetime.now()}")
-
-  # while True:
-  #   WHO_scrape()
-  #   ncov_scrape()
-  #   sleep(duration)
-
-  # return "DONE"
