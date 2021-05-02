@@ -31,13 +31,16 @@ def WHO_scrape(driver):
     print(f"\nGlobal Bestätigte Infektionen: {total_deceased}")
 
     # click the dropdown
-    dropdown = driver.find_element_by_xpath(
-      "(//div[@class='dropdown__control css-yk16xz-control'])")
+    dropdown = driver.find_element_by_xpath("(//div[@class='dropdown__control css-yk16xz-control'])")
     dropdown.click()
+    
+    print("flag 1")
     
     # click the 'Deaths" option
     option = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'react-select-6-option-1')))
     option.click()
+    
+    print("flag 2")
     
     # Fetch the newly displayed value
     new_deceased_el = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.sc-fzoJMP.fQymcb')))
@@ -108,7 +111,7 @@ def ncov_scrape(driver):
     deceased.new = total_deceased - deceased.total
     deceased.total = total_deceased
     deceased.save()
-    print(location + " total deceased : " + str(total_infected))
+    print(location + " total deceased : " + str(total_deceased))
 
   try:
     location_data('United States', "World")
@@ -129,18 +132,18 @@ def scrape():
 
   print(f"Execution start: {datetime.datetime.now()}")
 
-  # # Dev mode config
-  # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
-  # driver = webdriver.Chrome(PATH)
+  # Dev mode config
+  PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
+  driver = webdriver.Chrome(PATH)
 
-  # Prod mode config
-  import os
-  chrome_options = webdriver.ChromeOptions()
-  chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-  chrome_options.add_argument("--headless")
-  chrome_options.add_argument("--disable-dev-shm-usage")
-  chrome_options.add_argument("--no-sandbox")
-  driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+  # # Prod mode config
+  # import os
+  # chrome_options = webdriver.ChromeOptions()
+  # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+  # chrome_options.add_argument("--headless")
+  # chrome_options.add_argument("--disable-dev-shm-usage")
+  # chrome_options.add_argument("--no-sandbox")
+  # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
   WHO_scrape(driver)
   ncov_scrape(driver)
