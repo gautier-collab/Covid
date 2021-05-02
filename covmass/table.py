@@ -28,4 +28,6 @@ def updateDOCX():
   
   doc.save("static_cdn/media_root/lagebericht.docx")
   
+  print("doc is saved")
+  
   return "Updated DOCX file"
