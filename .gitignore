@@ -2,3 +2,4 @@ support
 project/.env
 */__pycache__
 db.sqlite3
+static_cdn/media_root/lagebericht.docx
