@@ -127,7 +127,7 @@ def ncov_scrape(driver):
   
   return "ncov_scrape is done"
 
-def Zh_scrape():
+def zh_scrape(driver):
   
   driver.get("https://www.zh.ch/de/gesundheit/coronavirus.html")
 
@@ -135,8 +135,8 @@ def Zh_scrape():
     header_1 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), 'Neue positive Zustände in den letzten 24 Stunden')]")))
     row_1 = header_1.find_element_by_xpath("./..")
     data_1 = row_1.find_elements_by_tag_name("strong")
-    new_infected = data_1[0].text
-    print("Zürich new infected: " + new_infected)
+    new_infected = number(data_1[0].text)
+    print("Zürich new infected: " + str(new_infected))
     
     infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
     infected.new = new_infected
@@ -146,13 +146,13 @@ def Zh_scrape():
     header_2 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), 'Verstorbene seit Pandemiebeginn')]")))
     row_2 = header_2.find_element_by_xpath("./..")
     data_2 = row_2.find_elements_by_tag_name("strong")
-    total_deceased = data_2[0].text
-    print("Zürich total deceased: " + total_deceased)
+    total_deceased = number(data_2[0].text)
+    print("Zürich total deceased: " + str(total_deceased))
     
-    # infected = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
-    # deceased.new = total_deceased - deceased.total
-    # deceased.total = total_deceased
-    # deceased.save()
+    deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
+    deceased.new = total_deceased - deceased.total
+    deceased.total = total_deceased
+    deceased.save()
     
   finally:
     pass
@@ -178,6 +178,7 @@ def scrape():
 
   WHO_scrape(driver)
   ncov_scrape(driver)
+  zh_scrape(driver)
 
   driver.quit()
 
