@@ -3,11 +3,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import time, datetime
+import os, time, datetime
 from time import sleep
 from .models import Zone, Infected, Metric, Deceased, Source, Update
 
-from .table import updateDOCX
+# from .table import updateDOCX
 
 def number(some_string):
   return int(some_string.replace(',', '').replace(' ', ''))
@@ -127,6 +127,38 @@ def ncov_scrape(driver):
   
   return "ncov_scrape is done"
 
+def Zh_scrape():
+  
+  driver.get("https://www.zh.ch/de/gesundheit/coronavirus.html")
+
+  try:
+    header_1 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), 'Neue positive Zustände in den letzten 24 Stunden')]")))
+    row_1 = header_1.find_element_by_xpath("./..")
+    data_1 = row_1.find_elements_by_tag_name("strong")
+    new_infected = data_1[0].text
+    print("Zürich new infected: " + new_infected)
+    
+    infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
+    infected.new = new_infected
+    infected.total = infected.total + new_infected
+    infected.save()
+    
+    header_2 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), 'Verstorbene seit Pandemiebeginn')]")))
+    row_2 = header_2.find_element_by_xpath("./..")
+    data_2 = row_2.find_elements_by_tag_name("strong")
+    total_deceased = data_2[0].text
+    print("Zürich total deceased: " + total_deceased)
+    
+    # infected = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
+    # deceased.new = total_deceased - deceased.total
+    # deceased.total = total_deceased
+    # deceased.save()
+    
+  finally:
+    pass
+  
+  return "Zh scrape is done"
+
 
 def scrape():
 
@@ -137,7 +169,6 @@ def scrape():
   # driver = webdriver.Chrome(PATH)
 
   # Prod mode config
-  import os
   chrome_options = webdriver.ChromeOptions()
   chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
   chrome_options.add_argument("--headless")
@@ -150,7 +181,7 @@ def scrape():
 
   driver.quit()
 
-  updateDOCX()
+  # updateDOCX()
 
   Update.objects.create(time=datetime.datetime.now())
 
