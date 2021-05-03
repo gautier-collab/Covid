@@ -15,22 +15,21 @@ def index(request):
   return render(request, "covmass/index.html", context)
 
 
-from django.core.files.storage import FileSystemStorage
+# from django.core.files.storage import FileSystemStorage
 
-def uploadfile_view(request):
-  if request.method == 'POST':
-    f = request.FILES['file']
-    fs = FileSystemStorage()
-    filename, ext=str(f).split('.')
-    file = fs.save(str(f),f)
-    fileurl = fs.url(file)
-    size = fs.size(file)
-    return render(request, 'covmass/uploadfile.html', {
-      'fileUrl':fileurl, 
-      "fileName": filename,
-      "ext":ext, 
-      "size": size,
-    })
-
-  else:
-    return render(request, 'covmass/uploadfile.html', {})
+# def uploadfile_view(request):
+#   if request.method == 'POST':
+#     f = request.FILES['file']
+#     fs = FileSystemStorage()
+#     filename, ext=str(f).split('.')
+#     file = fs.save(str(f),f)
+#     fileurl = fs.url(file)
+#     size = fs.size(file)
+#     return render(request, 'covmass/uploadfile.html', {
+#       'fileUrl':fileurl, 
+#       "fileName": filename,
+#       "ext":ext, 
+#       "size": size,
+#     })
+#   else:
+#     return render(request, 'covmass/uploadfile.html', {})
