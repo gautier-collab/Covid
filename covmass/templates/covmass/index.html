@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <header>
@@ -11,7 +13,7 @@
       body {
         /* font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
         color: white;
-        background-color: rgb(90,94,107);
+        background-color: rgba(90, 94, 107, 0.872);
         font-size: 0.9rem;
       }
 
@@ -19,9 +21,21 @@
         background-color: rgb(46,51,62);
       }
 
-      td{
+      td {
         background-color: rgb(60,64,76);
         text-align: right;
+      }
+
+      h1 img {
+        margin-bottom: 1rem;
+        margin-right: 2rem;
+        height: 4rem;
+      }
+
+      .main-logo {
+        height: 3rem;
+        margin: 2rem;
+        margin-left: 3rem;
       }
 
       .left {
@@ -58,6 +72,7 @@
       h1 {
         text-align: center;
         margin: 5vh;
+        margin-top: 0;
       }
 
       #download {
@@ -75,13 +90,23 @@
   <body>
 
     <div class="row">
-
-      <div class="col-lg-2 col-sm-1">
+      <div class="col-lg-12 col-sm-12">
+        <a href="https://www.nexus.ethz.ch">
+          <img class="main-logo" src='{% static "covmass/logo_with_text.gif" %}' alt="NEXUS logo">
+        </a>
       </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-2 col-sm-1"></div>
 
       <div class="col-lg-8 col-sm-10">
 
-        <h1>Covid-19 Lagebericht</h1>
+        <h1>
+          <!-- <img src='{% static "covmass/logo_only.png" %}' alt="NEXUS logo"> -->
+          Covid-19 Lagebericht
+        </h1>
 
         <table class="center">
           <tbody>
