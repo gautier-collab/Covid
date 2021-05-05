@@ -50,12 +50,14 @@ def WHO_scrape(driver):
 
     # Update database
     infected = Infected.objects.get(zone=Zone.objects.get(name="Global"))
+    infected.new = total_infected - infected.total
+    # infected.new = new_infected
     infected.total = total_infected
-    infected.new = new_infected
     infected.save()
     deceased = Deceased.objects.get(zone=Zone.objects.get(name="Global"))
+    deceased.new = total_deceased - deceased.total
+    # deceased.new = new_deceased
     deceased.total = total_deceased
-    deceased.new = new_deceased
     deceased.save()
 
   finally:
