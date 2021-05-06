@@ -131,25 +131,21 @@ def ncov_scrape(driver):
 
 def zh_scrape(driver):
   
-  driver.get("https://www.zh.ch/de/gesundheit/coronavirus.html")
+  driver.get("https://raw.githubusercontent.com/openZH/covid_19/master/fallzahlen_kanton_total_csv_v2/COVID19_Fallzahlen_Kanton_ZH_total.csv")
 
   try:
-    header_1 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), 'Neue positive Zustände in den letzten 24 Stunden')]")))
-    row_1 = header_1.find_element_by_xpath("./..")
-    data_1 = row_1.find_elements_by_tag_name("strong")
-    new_infected = number(data_1[0].text)
-    print("Zürich new infected: " + str(new_infected))
+    content = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME, "pre")))
+    today_substring = [i for i in content.text.split('\n') if i][-1]
+    today_array = today_substring.split(",")
+    total_infected = number(today_array[4])
+    total_deceased = number(today_array[10])
+    print("Zürich total infected: " + str(total_infected))
+    print("Zürich total deceased: " + str(total_deceased))
     
     infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
-    infected.new = new_infected
-    infected.total = infected.total + new_infected
+    infected.new = total_infected - infected.total
+    infected.total = total_infected
     infected.save()
-    
-    header_2 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), 'Verstorbene seit Pandemiebeginn')]")))
-    row_2 = header_2.find_element_by_xpath("./..")
-    data_2 = row_2.find_elements_by_tag_name("strong")
-    total_deceased = number(data_2[0].text)
-    print("Zürich total deceased: " + str(total_deceased))
     
     deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
     deceased.new = total_deceased - deceased.total
