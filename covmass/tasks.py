@@ -7,7 +7,7 @@ import os, time, datetime
 from time import sleep
 from .models import Zone, Infected, Metric, Deceased, Source, Update
 
-# from .table import updateDOCX
+from .table import updateDOCX
 
 def number(some_string):
   return int(some_string.replace(',', '').replace(' ', ''))
@@ -135,21 +135,29 @@ def zh_scrape(driver):
 
   try:
     content = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME, "pre")))
+    
+    yesterday_substring = [i for i in content.text.split('\n') if i][-2]
+    yesterday_array = yesterday_substring.split(",")
+    yesterday_infected = number(yesterday_array[4])
+    yesterday_deceased = number(yesterday_array[10])
+    print("Zürich yesterday infected: " + str(yesterday_infected))
+    print("Zürich yesterday deceased: " + str(yesterday_deceased))
+    
     today_substring = [i for i in content.text.split('\n') if i][-1]
     today_array = today_substring.split(",")
-    total_infected = number(today_array[4])
-    total_deceased = number(today_array[10])
-    print("Zürich total infected: " + str(total_infected))
-    print("Zürich total deceased: " + str(total_deceased))
+    today_infected = number(today_array[4])
+    today_deceased = number(today_array[10])
+    print("Zürich today infected: " + str(today_infected))
+    print("Zürich totday deceased: " + str(today_deceased))
     
     infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
-    infected.new = total_infected - infected.total
-    infected.total = total_infected
+    infected.new = today_infected - yesterday_infected
+    infected.total = today_infected
     infected.save()
     
     deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
-    deceased.new = total_deceased - deceased.total
-    deceased.total = total_deceased
+    deceased.new = today_deceased - yesterday_deceased
+    deceased.total = today_deceased
     deceased.save()
     
   finally:
@@ -176,11 +184,12 @@ def scrape():
 
   WHO_scrape(driver)
   ncov_scrape(driver)
-  zh_scrape(driver)
+  if datetime.datetime.today().weekday() != (0 or 6):
+    zh_scrape(driver)
 
   driver.quit()
 
-  # updateDOCX()
+  updateDOCX()
 
   Update.objects.create(time=datetime.datetime.now())
 
