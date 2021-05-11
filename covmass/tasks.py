@@ -206,7 +206,7 @@ def scrape():
 
   WHO_scrape(driver)
   ncov_scrape(driver)
-  if datetime.datetime.today().weekday() != (0 or 6):
+  if datetime.today().weekday() != (0 or 6):
     zh_scrape(driver)
 
   driver.quit()
