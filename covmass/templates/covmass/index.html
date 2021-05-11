@@ -18,6 +18,10 @@
         padding-bottom: 13vh;
       }
 
+      b {
+        margin-left: 0.58rem;
+      }
+
       th {
         background-color: rgb(46,51,62);
       }
@@ -45,6 +49,7 @@
       }
 
       table {
+        margin-top: 3vh;
         table-layout: fixed;
       }
 
@@ -80,12 +85,14 @@
       }
 
       .legend {
-        margin: 1rem;
+        color: black;
+        margin-left: 1.4rem;
+        margin-top: 3vh;
         font-size: 1.15rem;
       }
 
       button {
-        margin-top: 8vh;
+        margin-top: 6vh;
       }
 
     </style>
@@ -115,8 +122,6 @@
           Covid-19 Lagebericht
         </h2>
 
-        <p class="legend">Letzte Aktualisierung: {{update}}</p>
-
         <table class="center">
           <tbody>
             <tr class="header">
@@ -143,6 +148,8 @@
 
           </tbody>
         </table>
+
+        <p class="legend">Letzte Aktualisierung: <b>{{update}}</b></p>
 
         <div class="center">
           <a href="/media/lagebericht.docx" class="link">

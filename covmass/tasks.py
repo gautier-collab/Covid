@@ -203,12 +203,12 @@ def scrape():
   # chrome_options.add_argument("--no-sandbox")
   # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-  WHO_scrape(driver)
-  ncov_scrape(driver)
-  if datetime.today().weekday() != (0 or 6):
-    zh_scrape(driver)
+  # WHO_scrape(driver)
+  # ncov_scrape(driver)
+  # if datetime.today().weekday() != (0 or 6):
+  #   zh_scrape(driver)
 
-  driver.quit()
+  # driver.quit()
 
   updateDOCX()
 
