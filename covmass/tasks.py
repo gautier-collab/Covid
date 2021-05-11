@@ -199,7 +199,7 @@ def scrape():
   options.add_argument('--no-sandbox')
   
   PATH=f"{settings.BASE_DIR}/staticfiles/chromedriver"
-  driver = webdriver.Chrome(executable_path="staticfiles/chromedriver", options=options)
+  driver = webdriver.Chrome(PATH, options=options)
     
 
   # # Heroku config
