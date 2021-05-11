@@ -10,6 +10,7 @@ def index(request):
   "infected": Infected.objects.all(),
   "zones": Zone.objects.all(),
   "metrics": Metric.objects.all(),
+  "update": Update.objects.all().last()
   }
 
   return render(request, "covmass/index.html", context)
