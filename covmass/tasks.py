@@ -177,14 +177,8 @@ def scrape():
   # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
   # driver = webdriver.Chrome(PATH)
 
-  # VM config 1
-  # PATH = os.path.realpath(__file__)
-  # # 
-  # driver = webdriver.Chrome(PATH)
-
   # VM config
   user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
-
   options = webdriver.ChromeOptions()
   options.headless = True
   options.add_argument(f'user-agent={user_agent}')
@@ -198,7 +192,6 @@ def scrape():
   options.add_argument('--disable-gpu')
   options.add_argument('--disable-dev-shm-usage')
   options.add_argument('--no-sandbox')
-  
   PATH=f"{settings.BASE_DIR}/staticfiles/chromedriver"
   driver = webdriver.Chrome(PATH, options=options)
     
@@ -211,12 +204,12 @@ def scrape():
   # chrome_options.add_argument("--no-sandbox")
   # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-  # WHO_scrape(driver)
-  # ncov_scrape(driver)
-  # if datetime.datetime.today().weekday() != (0 or 6):
-  #   zh_scrape(driver)
+  WHO_scrape(driver)
+  ncov_scrape(driver)
+  if datetime.datetime.today().weekday() != (0 or 6):
+    zh_scrape(driver)
 
-  # driver.quit()
+  driver.quit()
 
   updateDOCX()
 
