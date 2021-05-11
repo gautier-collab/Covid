@@ -203,15 +203,15 @@ def scrape():
   # chrome_options.add_argument("--no-sandbox")
   # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-  WHO_scrape(driver)
-  ncov_scrape(driver)
-  if datetime.today().weekday() != (0 or 6):
-    zh_scrape(driver)
+  # WHO_scrape(driver)
+  # ncov_scrape(driver)
+  # if datetime.today().weekday() != (0 or 6):
+  #   zh_scrape(driver)
 
-  driver.quit()
+  # driver.quit()
 
   updateDOCX()
 
-  Update.objects.create(time=f"{str(datetime.today().day).zfill(2)}.{str(datetime.today().month).zfill(2)}.{datetime.today().year} um {str(datetime.today().hour).zfill(2)}:{str(datetime.today().minute).zfill(2)}")
+  # Update.objects.create(time=f"{str(datetime.today().day).zfill(2)}.{str(datetime.today().month).zfill(2)}.{datetime.today().year} um {str(datetime.today().hour).zfill(2)}:{str(datetime.today().minute).zfill(2)}")
 
   print(f"Execution end: {datetime.now()}")
