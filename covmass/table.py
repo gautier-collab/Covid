@@ -14,8 +14,8 @@ def updateDOCX():
   p.paragraph_format.space_after = Pt(15)
 
   table = doc.add_table(rows=1, cols=6)
-  table.style = "Medium Shading 1 Accent 1"
-  table.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+  table.style = "Light Grid Accent 1"
+  table.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
   header_cells = table.rows[0].cells
   header_cells[0].text = "Ort"
   header_cells[1].text = "Bestätigte Infektionen"
@@ -23,6 +23,14 @@ def updateDOCX():
   header_cells[3].text = "Todesfälle"
   header_cells[4].text = "∆Todesfälle"
   header_cells[5].text = "Quelle"
+
+  header_cells[0].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+  header_cells[1].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+  header_cells[2].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+  header_cells[3].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+  header_cells[4].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+  header_cells[5].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+
 
   for zone in Zone.objects.all():
     cells = table.add_row().cells
@@ -33,6 +41,13 @@ def updateDOCX():
     cells[3].text = zone.deceased.display_total()
     cells[4].text = zone.deceased.display_new()
     cells[5].text = zone.source.name
+    
+    cells[0].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cells[1].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cells[2].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cells[3].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cells[4].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cells[5].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     
     cells[1].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     cells[2].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
