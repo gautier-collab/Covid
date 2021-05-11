@@ -6,8 +6,10 @@ from selenium.webdriver.support import expected_conditions as EC
 import os, time, datetime
 from time import sleep
 from .models import Zone, Infected, Metric, Deceased, Source, Update
-
+from django.conf import settings
 from .table import updateDOCX
+
+
 
 def number(some_string):
   return int(some_string.replace(',', '').replace(' ', ''))
@@ -174,6 +176,11 @@ def scrape():
   # PATH="/Users/gautier/Documents/Z/Chromedriver/chromedriver"
   # driver = webdriver.Chrome(PATH)
 
+  # VM config 1
+  # PATH = os.path.realpath(__file__)
+  # # 
+  # driver = webdriver.Chrome(PATH)
+
   # VM config
   user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
 
@@ -190,6 +197,8 @@ def scrape():
   options.add_argument('--disable-gpu')
   options.add_argument('--disable-dev-shm-usage')
   options.add_argument('--no-sandbox')
+  
+  PATH=f"{settings.BASE_DIR}/staticfiles/chromedriver"
   driver = webdriver.Chrome(executable_path="staticfiles/chromedriver", options=options)
     
 
