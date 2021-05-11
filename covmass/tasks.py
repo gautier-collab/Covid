@@ -37,13 +37,12 @@ def WHO_scrape(driver):
     dropdown = driver.find_element_by_xpath("(//div[@class='dropdown__control css-yk16xz-control'])")
     dropdown.click()
     
-    print("flag 1")
-    
     # click the 'Deaths" option
-    option = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'react-select-6-option-1')))
+    try:
+      option = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'Deaths')]")))
+    except:
+      option = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'react-select-6-option-1')))
     option.click()
-    
-    print("flag 2")
     
     # Fetch the newly displayed value
     new_deceased_el = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.sc-fzoJMP.fQymcb')))

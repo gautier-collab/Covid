@@ -53,6 +53,6 @@ def updateDOCX():
     # e.alignment = WD_ALIGN_PARAGRAPH.RIGHT
   
   doc.save("static_cdn/media_root/lagebericht.docx")
-  print("doc is saved")
+  print("DOCX is saved")
   
   return "Updated DOCX file"
