@@ -3,4 +3,4 @@ project/.env
 */__pycache__
 db.sqlite3
 staticfiles/chromedriver
-static_cdn/media_root/lagebericht.docx
+static_cdn/media_root
