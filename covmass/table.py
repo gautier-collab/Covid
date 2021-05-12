@@ -54,8 +54,8 @@ def updateDOCX():
     cells[3].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     cells[4].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     
-  p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am 11.05.2021 um 15:30 ")
-  # p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am {str(datetime.today().day).zfill(2)}.{str(datetime.today().month).zfill(2)}.{datetime.today().year} um {str(datetime.today().hour).zfill(2)}:{str(datetime.today().minute).zfill(2)} aktualisiert.")
+  # p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am 11.05.2021 um 15:30 ")
+  p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am {str(datetime.today().day).zfill(2)}.{str(datetime.today().month).zfill(2)}.{datetime.today().year} um {str(datetime.today().hour).zfill(2)}:{str(datetime.today().minute).zfill(2)} aktualisiert.")
   p2.paragraph_format.space_before = Pt(20)
 
   doc.save("static_cdn/media_root/lagebericht.docx")
