@@ -53,12 +53,10 @@ def WHO_scrape(driver):
     # Update database
     infected = Infected.objects.get(zone=Zone.objects.get(name="Global"))
     infected.new = total_infected - infected.total
-    # infected.new = new_infected
     infected.total = total_infected
     infected.save()
     deceased = Deceased.objects.get(zone=Zone.objects.get(name="Global"))
     deceased.new = total_deceased - deceased.total
-    # deceased.new = new_deceased
     deceased.total = total_deceased
     deceased.save()
 
@@ -152,15 +150,25 @@ def zh_scrape(driver):
     print("Zürich today infected: " + str(today_infected))
     print("Zürich totday deceased: " + str(today_deceased))
     
-    infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
-    infected.new = today_infected - yesterday_infected
-    infected.total = today_infected
-    infected.save()
+    equivalence1 = (infected.new == today_infected - yesterday_infected)
+    equivalence2 = (infected.total == today_infected)
+    equivalence3 = (deceased.new == today_deceased - yesterday_deceased)
+    equivalence4 = (deceased.total == today_deceased)
     
-    deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
-    deceased.new = today_deceased - yesterday_deceased
-    deceased.total = today_deceased
-    deceased.save()
+    if equivalence1 and equivalence2 and equivalence3 and equivalence4:
+      print("Zurich data didn't change")
+      
+    else:
+      print('new Zurich data')
+      infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
+      infected.new = today_infected - yesterday_infected
+      infected.total = today_infected
+      infected.save()
+      
+      deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
+      deceased.new = today_deceased - yesterday_deceased
+      deceased.total = today_deceased
+      deceased.save()
     
   finally:
     pass
@@ -195,18 +203,9 @@ def scrape():
   driver = webdriver.Chrome(PATH, options=options)
     
 
-  # # Heroku config
-  # chrome_options = webdriver.ChromeOptions()
-  # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-  # chrome_options.add_argument("--headless")
-  # chrome_options.add_argument("--disable-dev-shm-usage")
-  # chrome_options.add_argument("--no-sandbox")
-  # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
   WHO_scrape(driver)
   ncov_scrape(driver)
-  if datetime.today().weekday() != (0 or 6):
-    zh_scrape(driver)
+  zh_scrape(driver)
 
   driver.quit()
 

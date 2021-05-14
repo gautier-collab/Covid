@@ -48,3 +48,7 @@ class Update(models.Model):
   
   def __str__(self):
     return self.time
+  
+class Zurich_update(models.Model):
+  time = models.CharField(max_length=64)
+  display = models.BooleanField(default=False)
