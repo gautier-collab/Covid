@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import os, time
 from datetime import datetime
 from time import sleep
-from .models import Zone, Infected, Metric, Deceased, Source, Update
+from .models import Zone, Infected, Metric, Deceased, Source, Update, Update_zh
 from django.conf import settings
 from .table import updateDOCX
 
@@ -150,6 +150,10 @@ def zh_scrape(driver):
     print("Zürich today infected: " + str(today_infected))
     print("Zürich totday deceased: " + str(today_deceased))
     
+    infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
+    deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
+    update_zh = Update_zh.objects.all().last()
+    
     equivalence1 = (infected.new == today_infected - yesterday_infected)
     equivalence2 = (infected.total == today_infected)
     equivalence3 = (deceased.new == today_deceased - yesterday_deceased)
@@ -157,19 +161,24 @@ def zh_scrape(driver):
     
     if equivalence1 and equivalence2 and equivalence3 and equivalence4:
       print("Zurich data didn't change")
+      update_zh.display = True
+      update_zh.save()
       
     else:
       print('new Zurich data')
-      infected = Infected.objects.get(zone=Zone.objects.get(name="Zürich"))
+      
       infected.new = today_infected - yesterday_infected
       infected.total = today_infected
       infected.save()
       
-      deceased = Deceased.objects.get(zone=Zone.objects.get(name="Zürich"))
       deceased.new = today_deceased - yesterday_deceased
       deceased.total = today_deceased
       deceased.save()
     
+      update_zh.time=f"{str(datetime.today().day).zfill(2)}.{str(datetime.today().month).zfill(2)}.{datetime.today().year} um {str(datetime.today().hour).zfill(2)}:{str(datetime.today().minute).zfill(2)}"
+      update_zh.display = False
+      update_zh.save()
+      
   finally:
     pass
   

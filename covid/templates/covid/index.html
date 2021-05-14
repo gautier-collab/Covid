@@ -159,6 +159,10 @@
 
         <p class="legend">Letzte Aktualisierung: <b>{{update}}</b></p>
 
+        {% if update_zh.display %}
+          <p class="legend">Zürich letzte Aktualisierung: <b>{{update_zh.time}}</b></p>
+        {% endif %}
+
         <div class="center">
           <a href="/media/{{filename}}" class="link">
             <button type="button" class="btn btn-dark">Download</button>
@@ -173,34 +177,5 @@
     </div>
 
   </body>
-
-  
-  <!-- <script>
-    function download(url, name) {
-      fetch(url).then(async(res) => {
-        const dfile = await res.covid();
-        var covidURL = 
-          window.URL && window.URL.createObjectURL ?
-          window.URL.createObjectURL(dfile) : window.webkitURL.createObjectURL(dfile);
-        var tempLink = document.createElement('a');
-        tempLink.style.display = "none";
-        tempLink.href = covidURL;
-        tempLink.setAttribute("download", name);
-
-        if (typeof tempLink.download === "undefined") {
-          tempLink.setAttribute("target", "_blank");
-        }
-
-        document.body.appendChild(tempLink);
-        tempLink.click();
-
-        setTimeout(function() {
-          document.body.removeChild(tempLink);
-          window.URL.revokeObjectURL(covidURL);
-        },200);
-
-      });
-    }
-  </script> -->
 
 </html>

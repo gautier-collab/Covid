@@ -23,6 +23,7 @@ def index(request):
   "zones": Zone.objects.all(),
   "metrics": Metric.objects.all(),
   "update": Update.objects.all().last(),
+  "update_zh": Update_zh.objects.all().last(),
   "filename": new_name
   }
 
