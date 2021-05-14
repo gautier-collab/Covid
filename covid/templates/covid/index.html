@@ -83,7 +83,7 @@
       .center {
         width: 100%;
         margin: 0 auto;
-        text-align:center
+        text-align:center;
       }
 
       h2 {
@@ -95,13 +95,34 @@
       .legend {
         color: black;
         margin-left: 1.4rem;
-        margin-top: 3vh;
+        margin-top: 5vh;
         font-size: 1.15rem;
       }
 
-      button {
-        margin-top: 4vh;
+
+
+      .outer {
+        display: table;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
       }
+      
+      .middle {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      
+      .inner {
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        /*whatever width you want*/
+      }
+
+
 
     </style>
 
@@ -157,16 +178,31 @@
           </tbody>
         </table>
 
-        <p class="legend">Letzte Aktualisierung: <b>{{update}}</b></p>
+        <div class="legend">
+          <div class="row">
+        
+            <div class="col-lg-8 col-md-8 col-sm-9">
+              <p>Letzte Aktualisierung: <b>{{update}}</b></p>
+              {% if update_zh.display %}
+                <p>Zürich letzte Aktualisierung: <b>{{update_zh.time}}</b></p>
+              {% endif %}
+            </div>
 
-        {% if update_zh.display %}
-          <p class="legend">Zürich letzte Aktualisierung: <b>{{update_zh.time}}</b></p>
-        {% endif %}
+            <div class="col-lg-2 col-md-0 col-sm-0"></div>
 
-        <div class="center">
-          <a href="/media/{{filename}}" class="link">
-            <button type="button" class="btn btn-dark">Download</button>
-          </a>
+            <div class="col-lg-2 col-md-4 col-sm-3">
+              <div class="outer">
+                <div class="middle">
+                  <div class="inner">
+                    <a href="/media/{{filename}}" class="link">
+                      <button type="button" class="btn btn-dark">Download</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
