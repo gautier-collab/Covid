@@ -1,6 +1,6 @@
 import os, docx
 from datetime import datetime
-from covid.models import Zone, Update
+from covid.models import Zone, Update, Update_zh
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.shared import Pt
@@ -59,6 +59,11 @@ def updateDOCX():
   # p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am 11.05.2021 um 15:30 ")
   p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am {Update.objects.all().last().time} aktualisiert.")
   p2.paragraph_format.space_before = Pt(20)
+
+  update_zh = Update_zh.objects.all().last()
+  if update_zh.display :
+    p3 = doc.add_paragraph(f"Zürich letzte Aktualisierung: {update_zh.time}")
+    p3.paragraph_format.space_before = Pt(10)
 
   path=f"{settings.BASE_DIR}/static_cdn/media_root"
   for (dirpath, dirnames, filenames) in walk(path):

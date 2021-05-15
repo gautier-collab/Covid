@@ -8,6 +8,7 @@
     <!-- Bootstrap JS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    {% comment %}
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'covid/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'covid/favicon/favicon-32x32.png' %}">
@@ -16,6 +17,17 @@
     <link rel="mask-icon" href="{% static 'covid/favicon/safari-pinned-tab.svg' %}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    {% endcomment %}
+
+    <link rel="apple-touch-icon" sizes="57x57" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="114x114" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="72x72" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="144x144" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="60x60" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="120x120" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="76x76" href='{% static "covid/logo_only.png" %}'>
+    <link rel="apple-touch-icon" sizes="152x152" href='{% static "covid/logo_only.png" %}'>
+    <link rel="shortcut icon" type="image/png" href='{% static "covid/logo_only.png" %}'/>
 
     <style>
       body {
@@ -99,8 +111,6 @@
         font-size: 1.15rem;
       }
 
-
-
       .outer {
         display: table;
         position: absolute;
@@ -121,9 +131,6 @@
         width: 400px;
         /*whatever width you want*/
       }
-
-
-
     </style>
 
   </header>
