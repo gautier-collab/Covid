@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-  <header>
+  <head>
     <title>Covid-19 Lagebericht</title>
 
     <!-- Bootstrap JS -->
@@ -131,9 +131,87 @@
         width: 400px;
         /*whatever width you want*/
       }
+
+      #swiss-sentence {
+        text-align: justify;
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 600px) {
+        .side-col {
+          display: inline-block;
+          width: 3%
+        }
+
+        .central-col {
+          display: inline-block;
+          width: calc(100% - 2 * 3%)
+        }
+      }
+
+      @media (min-width: 600px) and (max-width: 800px) {
+        .side-col {
+          display: inline-block;
+          width: 5%
+        }
+
+        .central-col {
+          display: inline-block;
+          width: calc(100% - 2 * 5%)
+        }
+      }
+
+      @media (min-width: 800px) and (max-width: 1000px) {
+        .side-col {
+          display: inline-block;
+          width: 8%
+        }
+
+        .central-col {
+          display: inline-block;
+          width: calc(100% - 2 * 8%)
+        }
+      }
+
+      @media (min-width: 1000px) and (max-width: 1300px) {
+        .side-col {
+          display: inline-block;
+          width: 14%
+        }
+
+        .central-col {
+          display: inline-block;
+          width: calc(100% - 2 * 14%)
+        }
+      }
+
+      @media (min-width: 1300px) and (max-width: 1600px) {
+        .side-col {
+          display: inline-block;
+          width: 21%
+        }
+
+        .central-col {
+          display: inline-block;
+          width: calc(100% - 2 * 21%)
+        }
+      }
+
+      @media (min-width: 1600px) {
+        .side-col {
+          display: inline-block;
+          width: 31%
+        }
+
+        .central-col {
+          display: inline-block;
+          width: calc(100% - 2 * 31%)
+        }
+      }
+
     </style>
 
-  </header>
+  </head>
 
   <body>
 
@@ -149,9 +227,9 @@
 
     <div class="row">
 
-      <div class="col-lg-2 col-sm-1"></div>
+      <div class="side-col">a</div>
 
-      <div class="col-lg-8 col-sm-10">
+      <div class="central-col">
 
         <h2>
           <!-- <img src='{% static "covid/logo_only.png" %}' alt="NEXUS logo"> -->
@@ -193,20 +271,25 @@
               {% if update_zh.display %}
                 <p>Zürich letzte Aktualisierung: <b>{{update_zh.time}}</b></p>
               {% endif %}
+              
+              <div id="swiss-sentence">
+                Die Daten für die Schweiz werden von den Schweizer Behörden am Wochenende nicht aktualisiert. Aus diesem Grund können Nullwerte für die Entwicklung der letzten 24 Stunden angezeigt werden. 
+              </div>
+
             </div>
 
             <div class="col-lg-2 col-md-0 col-sm-0"></div>
 
             <div class="col-lg-2 col-md-4 col-sm-3">
-              <div class="outer">
+              <!--<div class="outer">
                 <div class="middle">
-                  <div class="inner">
+                  <div class="inner">-->
                     <a href="/media/{{filename}}" class="link">
                       <button type="button" class="btn btn-dark">Download</button>
                     </a>
-                  </div>
+                  <!--</div>
                 </div>
-              </div>
+              </div>-->
             </div>
 
           </div>
@@ -216,7 +299,7 @@
 
     </div>
 
-    <div class="col-lg-2 col-sm-1">
+    <div class="side-col">
     </div>
 
   </body>
