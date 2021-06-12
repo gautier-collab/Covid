@@ -7,6 +7,7 @@ from docx.shared import Pt
 from django.conf import settings
 from os import walk
 
+# function creating a new Word document from the newly fetched values
 def updateDOCX():
 
   doc = docx.Document()
@@ -15,6 +16,7 @@ def updateDOCX():
   p1 = doc.add_paragraph("")
   p1.paragraph_format.space_before = Pt(20)
 
+  # header row content
   table = doc.add_table(rows=1, cols=6)
   table.style = "Light Grid Accent 1"
   table.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
@@ -26,6 +28,7 @@ def updateDOCX():
   header_cells[4].text = "∆Todesfälle"
   header_cells[5].text = "Quelle"
 
+  # center vertically the values contained in the header cells
   header_cells[0].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
   header_cells[1].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
   header_cells[2].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
@@ -33,10 +36,11 @@ def updateDOCX():
   header_cells[4].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
   header_cells[5].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
 
-
+  # iterate over every Zone instance of the database to define a new row
   for zone in Zone.objects.all():
     cells = table.add_row().cells
     
+    # row content
     cells[0].text = zone.german_name
     cells[1].text = zone.infected.display_total()
     cells[2].text = zone.infected.display_new()
@@ -44,6 +48,7 @@ def updateDOCX():
     cells[4].text = zone.deceased.display_new()
     cells[5].text = zone.source.name
     
+    # center vertically the values contained in the cells
     cells[0].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     cells[1].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     cells[2].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
@@ -51,26 +56,31 @@ def updateDOCX():
     cells[4].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     cells[5].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     
+    # align to the right the numerical values
     cells[1].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     cells[2].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     cells[3].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     cells[4].paragraphs[0].paragraph_format.alignment=WD_ALIGN_PARAGRAPH.RIGHT
     
-  # p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am 11.05.2021 um 15:30 ")
+  # Include a sentence giving the time of the most recent update
   p2 = doc.add_paragraph(f"Diese Zahlen wurden von NEXUS ETH Zürich am {Update.objects.all().last().time} aktualisiert.")
   p2.paragraph_format.space_before = Pt(20)
 
+  # get the last update time of Zürich values and include a sentence if the 'display' attribute is True
   update_zh = Update_zh.objects.all().last()
   if update_zh.display :
     p3 = doc.add_paragraph(f"Zürich letzte Aktualisierung: {update_zh.time}")
     p3.paragraph_format.space_before = Pt(10)
 
+  # delete the already existing Word document
   path=f"{settings.BASE_DIR}/static_cdn/media_root"
   for (dirpath, dirnames, filenames) in walk(path):
     for filename in filenames:
       if "lagebericht" in filename:
         os.remove(f"{settings.BASE_DIR}/static_cdn/media_root/{filename}")
+        
+  # save the newly defined Word document
   doc.save("static_cdn/media_root/lagebericht.docx")
   print("DOCX is saved")
   
-  return "Updated DOCX file"
+  return "Word document is replaced"
