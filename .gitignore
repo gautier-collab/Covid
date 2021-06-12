@@ -5,3 +5,4 @@ db.sqlite3
 staticfiles/chromedriver
 static_cdn/media_root
 covid/migrations/*
+.env
