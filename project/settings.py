@@ -1,8 +1,8 @@
-import os
-import django_heroku
+import os, django_heroku
 from pathlib import Path
 from dotenv import load_dotenv
 from os.path import join, dirname
+from decouple import config
 
 # Read .env file
 dotenv_path = join(dirname(__file__), '.env')
@@ -24,7 +24,7 @@ MEDIA_URL = "/media/"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get("SECRET_KEY")
-SECRET_KEY = 'django-insecure-xz&36w+rj=m!44y6d0!&4wieh*)^@kv7r5edt4&*9$p1$6#y94'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # if turned to False, check that admin styles are still there

@@ -7,7 +7,7 @@ from docx.shared import Pt
 from django.conf import settings
 from os import walk
 
-# function creating a new Word document from the newly fetched values
+# function creating a new Word document containing a table that shows the newly registered values
 def updateDOCX():
 
   doc = docx.Document()
